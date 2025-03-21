@@ -12,6 +12,35 @@ data:
           "default": true,
           "dashboards": [
             {
+              "groupKind": "device",
+              "tabs": ["Golden Signal"],
+              "rows": [
+                    {
+                  "name": "pod",
+                  "title": "Devices",
+                  "tab": "Golden Signal",
+                  "graphs": [
+                    {
+                      "name": "pod_cpu_line",
+                      "title": "CPU",
+                      "description": "",
+                      "graphType": "line",
+                      "metricName": "pod",
+                      "queryExpression": "sum(rate(container_cpu_usage_seconds_total{pod=~\"argocd-metrics-server-6494ff4dc7-nz42q\"}[5m])) by (pod)"
+                    },
+                    {
+                      "name": "pod_cpu_pie",
+                      "title": "CPU Avg",
+                      "description": "",
+                      "graphType": "pie",
+                      "metricName": "pod",
+                      "queryExpression": "sum(rate(container_cpu_usage_seconds_total{pod=~\"argocd-metrics-server-6494ff4dc7-nz42q\"}[5m])) by (pod)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "groupKind": "pod",
               "tabs": ["Golden Signal"],
               "rows": [
@@ -298,7 +327,7 @@ data:
       {
         "Name": "default",
         "default": true,
-        "address": "http://prometheus-operated.monitoring.svc.cluster.local:9090"
+        "address": "http://prometheus-operated.default.svc.cluster.local:9090"
       }
     }
     }
